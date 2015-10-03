@@ -1,13 +1,4 @@
-# msfrpc-client
-NodeJS client for msfrpcd using Promises 
-
-```
-npm install msfrpc-client --save
-```
-
-## Usage
-```javascript
-var clientMsfrpc = require('msfrpc-client')
+var clientMsfrpc = require('../msfrpc-client')
 
 // align with msfrpcd settings
 // initialize client object
@@ -20,7 +11,6 @@ var client = new clientMsfrpc({
                           });
 
 // execute API command client.exec returns a promise
-client.exec(['core.version']).then(function(response){
-  console.log(response);
+client.exec(['core.version']).then(function(results){
+  console.log(results)
 });
-```

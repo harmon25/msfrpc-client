@@ -1,0 +1,16 @@
+{
+  "name": "msfrpc-client-node",
+  "version": "0.1.0",
+  "description": "",
+  "main": "msfrpc-client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "harmon25",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "msgpack5": "^3.1.0",
+    "request-promise": "^0.4.3"
+  }
+}
