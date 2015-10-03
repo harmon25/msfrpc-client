@@ -1,6 +1,6 @@
 {
   "name": "msfrpc-client-node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NodeJS client for msfrpcd using Bluebird Promises",
   "main": "msfrpc-client.js",
   "scripts": {
@@ -8,6 +8,14 @@
   },
   "author": "harmon25",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harmon25/msfrpc-client.git"
+  },
+  "keywords": [
+    "metasploit",
+    "security"
+  ],
   "dependencies": {
     "bluebird": "^2.10.2",
     "msgpack5": "^3.1.0",
