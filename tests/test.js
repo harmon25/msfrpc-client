@@ -3,10 +3,10 @@ var clientMsfrpc = require('../msfrpc-client')
 // align with msfrpcd settings
 // initialize client object
 var client = new clientMsfrpc({
-                            host:'172.17.0.2',  // optional : default = localhost
+                            host:'localhost',  // optional : default = localhost
                             port:55553,         // optional : default = 55553
                             user:"msfUser",     // optional : default = msfUser
-                            password:"agoodPass",    // optional : default = password
+                            password:"password",    // optional : default = password
                             ssl:true
                           });
 

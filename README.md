@@ -1,5 +1,5 @@
 # msfrpc-client
-NodeJS client for msfrpcd using Promises 
+NodeJS client for msfrpcd using Bluebird Promises 
 
 ```
 npm install msfrpc-client --save
@@ -12,10 +12,10 @@ var clientMsfrpc = require('msfrpc-client')
 // align with msfrpcd settings
 // initialize client object
 var client = new clientMsfrpc({
-                            host:'172.17.0.2',  // optional : default = localhost
-                            port:55553,         // optional : default = 55553
-                            user:"msfUser",     // optional : default = msfUser
-                            password:"agoodPass",    // optional : default = password
+                            host:'localhost',    // optional : default = localhost
+                            port:55553,          // optional : default = 55553
+                            user:"msfUser",      // optional : default = msfUser
+                            password:"password", // optional : default = password
                             ssl:true
                           });
 
