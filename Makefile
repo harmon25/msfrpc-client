@@ -8,3 +8,6 @@ node: lib
 		file=`basename $$path`; \
 		$(BABEL) "lib/$$file" > "node/$$file"; \
 	done 
+
+clean: 
+	@rm -R node/

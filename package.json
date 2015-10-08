@@ -17,7 +17,6 @@
     "security"
   ],
   "dependencies": {
-    "async": "^1.4.2",
     "babel": "^5.8.23",
     "msgpack5": "^3.1.0",
     "request": "^2.64.0"
