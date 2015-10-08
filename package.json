@@ -4,7 +4,7 @@
   "description": "NodeJS client for msfrpcd with es6",
   "main": "msfrpc-client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/cucumber.js tests/features/msfrpc-client.features"
   },
   "author": "harmon25",
   "license": "MIT",
@@ -21,5 +21,9 @@
     "chalk": "^1.1.1",
     "msgpack5": "^3.1.0",
     "request": "^2.64.0"
+  },
+  "devDependencies": {
+    "cucumber": "^0.7.0",
+    "dockerode": "^2.2.3"
   }
 }
