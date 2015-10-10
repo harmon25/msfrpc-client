@@ -1,18 +1,9 @@
-# msfrpc-client
-NodeJS client for msfrpcd with es6 promises
-
-```
-npm install msfrpc-client --save
-```
-
-## Usage
-```javascript
-var MsfRpcClient = require('msfrpc-client');
+var MsfRpcClient = require('./node/msfrpc-client');
 
 var client = new MsfRpcClient({
                                user:"user",
                                password:'apass',
-                           //  token:'TEMP9619621247881849871235361738',  //Can be used instead of password
+                           //  token:'TEMP9456621123881849878566311738',  //Can be used instead of password
                                ssl:true,          // default
                                host:'localhost',  // default
                                port:55553         // default
@@ -39,6 +30,7 @@ client.exec(['module.exploits'])
 )
 .catch(console.log);
 
+
 // generate a token which will be persistently stored in postgres for API Access
 // var client = new MsfRpcClient({token:token,address:'somehost'})
 client.genToken()
@@ -47,4 +39,3 @@ client.genToken()
     console.log(`here is your token ${token}`);
   }
 ).catch(console.log);
-```
