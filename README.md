@@ -2,7 +2,7 @@
 NodeJS client for msfrpcd with es6 promises
 
 ```
-npm install msfrpc-client --save
+npm install msfrpc-client-node --save
 ```
 
 ## Usage

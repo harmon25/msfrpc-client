@@ -1,4 +1,4 @@
-var MsfRpcClient = require('./node/msfrpc-client');
+var MsfRpcClient = require('msfrpc-client-node');
 
 var client = new MsfRpcClient({
                                user:"user",
