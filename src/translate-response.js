@@ -15,9 +15,10 @@ function translateResponse(responseObj){
  // where the response is an object with a single key containing an array of objects eg workspaces: [{},{}] 
  if (responseLen === 1){
    var name = Object.keys(responseObj)[0]
-   //{responseObj.workspaces.array}
    for(var i=0;i<responseObj[name].length; i++){
-      // responseObj.workspaces.array[0]
+      if(responseObj[name][i] instanceof Buffer){
+        responseObj[name][i] = responseObj[name][i].toString('utf8');
+      }
       for(var [k,v] of Object.entries(responseObj[name][i]) ){
        if(responseObj[name][i][k] instanceof Buffer){
         responseObj[name][i][k] = responseObj[name][i][k].toString('utf8');

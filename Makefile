@@ -1,13 +1,12 @@
 BABEL = ./node_modules/.bin/babel
+SRC = $(wildcard src/*.js)
+LIB = $(SRC:src/%.js=node/%.js)
 
-all: node
+build: $(LIB)
 
-node: lib
-	@mkdir -p node/
-	@for path in lib/*.js; do \
-		file=`basename $$path`; \
-		$(BABEL) "lib/$$file" > "node/$$file"; \
-	done 
-
+node/%.js: src/%.js
+	@mkdir -p $(@D)
+	@$(BABEL) $< > $@
+ 
 clean: 
-	@rm -R node/
+	@rm -R $(LIB)
