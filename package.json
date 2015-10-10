@@ -5,7 +5,7 @@
   "main": "msfrpc-client.js",
   "scripts": {
     "clean": "rimraf node/*",
-    "build": "babel src/ -d node",
+    "build": "babel src/ -d node"
   },
   "author": "harmon25",
   "license": "MIT",

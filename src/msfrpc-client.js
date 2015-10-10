@@ -13,15 +13,15 @@ const decode = mp.decode;
 class MsfRpcClient {
 
   constructor(options) {
-      this.user = options.user || 'msfUser';
+      this.user = options.user || null;
       this.password = options.password || null
       this.ssl = options.ssl || true;
-      this.host = options.host || '172.17.0.2';
+      this.host = options.host || 'localhost';
       this.port = options.port || 55553
       this.token = options.token || null
 
-      if (!options.password && !options.token) {
-          throw new Error(chalk.red('Must initalize with token or password'));
+      if ((!options.password || !options.user) && !options.token) {
+         console.log(chalk.red('Must initialize with user and password or persistent token'));
       }
 
   }
