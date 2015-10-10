@@ -1,3 +1,5 @@
+require("babel/polyfill");
+
 function translateResponse(responseObj){
  var responseLen = Object.keys(responseObj).length
  // if the response is either result: 'success', result: 'failure'
@@ -13,14 +15,15 @@ function translateResponse(responseObj){
  // where the response is an object with a single key containing an array of objects eg workspaces: [{},{}] 
  if (responseLen === 1){
    var name = Object.keys(responseObj)[0]
-   //{responseObj.workspaces.array}
    for(var i=0;i<responseObj[name].length; i++){
-      // responseObj.workspaces.array[0]
-      for(k in responseObj[name][i]){
+      if(responseObj[name][i] instanceof Buffer){
+        responseObj[name][i] = responseObj[name][i].toString('utf8');
+      }
+      for(var [k,v] of Object.entries(responseObj[name][i]) ){
        if(responseObj[name][i][k] instanceof Buffer){
         responseObj[name][i][k] = responseObj[name][i][k].toString('utf8');
        } else if (responseObj[name][i][k] instanceof Object) {
-          for(key in responseObj[name][i][k]){
+          for(let [key,val] of Object.entries(responseObj[name][i][k])){
              if(responseObj[name][i][k][key] instanceof Buffer){
                responseObj[name][i][k][key] = responseObj[name][i][k][key].toString('utf8');
           };
@@ -32,7 +35,7 @@ function translateResponse(responseObj){
  // else module.info, and module.options 
  } else {
     // module.info
-    for(key in responseObj){
+    for(var [key,value] of Object.entries(responseObj)){
       //module.info.name & module.info.description
       if(responseObj[key] instanceof Buffer){
         responseObj[key] = responseObj[key].toString('utf8');
@@ -51,7 +54,7 @@ function translateResponse(responseObj){
       };
     // module.options
     } else {
-      for(k in responseObj[key]){
+      for(let [k,v] of Object.entries(responseObj[key])){
         //module.options.workspace.desc
         if (responseObj[key][k] instanceof Buffer){
           responseObj[key][k] = responseObj[key][k].toString('utf8');
