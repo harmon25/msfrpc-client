@@ -1,12 +1,3 @@
-# msfrpc-client
-NodeJS client for msfrpcd using Bluebird Promises 
-
-```
-npm install msfrpc-client --save
-```
-
-## Usage
-```javascript
 var MsfRpcClient = require('../msfrpc-client')
 
 var client = new MsfRpcClient({password:'agoodPass',user:'msfUser', host:'172.17.0.2'})
@@ -39,4 +30,3 @@ client.genToken()
     console.log(`here is your token ${token}`)
   }
 ).catch(console.log)
-```

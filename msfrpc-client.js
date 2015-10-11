@@ -1,7 +1,7 @@
 var rp = require('request-promise');
 var msgpack = require('msgpack5')(), encode = msgpack.encode , decode = msgpack.decode
 var Promise = require("bluebird");
-var translateResponse = require('./lib')
+var translateResponse = require('./lib/translate-response')
 
 
 // prototype function
@@ -16,14 +16,17 @@ clientMsfrpc.prototype.init = function(options){
   this.ssl = options.ssl || true;
   this.host = options.host || 'localhost';
   this.port = options.port || 55553
-  this.login()
+  this.token = options.token || null
 
+    if ((!options.password || !options.user) && !options.token) {
+      console.log('Must initialize with user and password or persistent token');
+    }
 }
 
 clientMsfrpc.prototype.login = Promise.method(function(){
     var cmd = ['auth.login', this.user, this.password]
 
-    function returnToken (res){
+    function setToken (res){
       this.token = res.token;
       return res.token
     }
@@ -33,8 +36,13 @@ clientMsfrpc.prototype.login = Promise.method(function(){
         return this.token;
     }
     //need to login, login set token, and return token
-    return this.rpc(cmd).then(returnToken.bind(this));
+    return this.rpc(cmd).then(setToken.bind(this));
 });
+
+clientMsfrpc.prototype.genToken = function(){
+    var cmd = ['auth.token_generate'];
+    return this.exec(cmd).then(function(res){return res.token;})
+}
 
 clientMsfrpc.prototype.rpc = function(cmd){
     var data = encode(cmd);
@@ -48,7 +56,7 @@ clientMsfrpc.prototype.rpc = function(cmd){
         'content-type':'binary/message-pack',
         'content-length': clength
       },
-      timeout:1500,
+      timeout:2500,
       encoding:null,
       strictSSL:false,
       body:data
@@ -80,5 +88,3 @@ clientMsfrpc.prototype.exec = Promise.method(function(args) {
     })
 
 module.exports = clientMsfrpc;
-
-
