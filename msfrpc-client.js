@@ -17,6 +17,8 @@ clientMsfrpc.prototype.init = function(options){
   this.host = options.host || 'localhost';
   this.port = options.port || 55553
   this.token = options.token || null
+  this.tokenTimeout = null;
+  this.persist = options.persist || false; 
 
     if ((!options.password || !options.user) && !options.token) {
       console.log('Must initialize with user and password or persistent token');
@@ -39,11 +41,6 @@ clientMsfrpc.prototype.login = Promise.method(function(){
     return this.rpc(cmd).then(setToken.bind(this));
 });
 
-clientMsfrpc.prototype.genToken = function(){
-    var cmd = ['auth.token_generate'];
-    return this.exec(cmd).then(function(res){return res.token;})
-}
-
 clientMsfrpc.prototype.rpc = function(cmd){
     var data = encode(cmd);
     var clength = Buffer.byteLength(data.toString('ascii'));
@@ -56,7 +53,7 @@ clientMsfrpc.prototype.rpc = function(cmd){
         'content-type':'binary/message-pack',
         'content-length': clength
       },
-      timeout:2500,
+      timeout:5000,
       encoding:null,
       strictSSL:false,
       body:data
@@ -72,6 +69,17 @@ clientMsfrpc.prototype.rpc = function(cmd){
 
 
 clientMsfrpc.prototype.exec = Promise.method(function(args) {
+  if(this.persist === true){
+    if(this.tokenTimeout != null){
+      clearTimeout(this.tokenTimeout)
+    }
+    this.tokenTimeout = setTimeout(
+      function(){
+        this.token = null
+      }.bind(this),270000
+      );
+  }
+  
   function addToken(token){
      var arr = [];
      arr.push(args.shift());
