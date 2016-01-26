@@ -1,10 +1,15 @@
-var MsfRpcClient = require('../msfrpc-client')
+var MsfRpcClient = require('msfrpc-client-node');
 
 // persist can be used to timeout token on the client, giving the illusion of a persisten token
 // set persist to true to set timeout one exec, after 4.5 minutes a token will timeout
-var client = new MsfRpcClient({password:'agoodPass',user:'msfUser', host:'172.17.0.4', persist:false})
+var client = new MsfRpcClient({
+                                password:'agoodPass',
+                                user:'msfUser',
+                                host:'localhost',
+                                persist:false
+                              });
 
-client.exec(['core.version'])
+client.exec('core.version')
 .then(
   (res)=>{
     console.log(`MSF Version : ${res.version} `)
@@ -21,5 +26,5 @@ client.exec(['module.exploits'])
     }
   }
 )
-.catch(console.log)
+.catch(console.log);
 

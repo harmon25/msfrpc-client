@@ -69,6 +69,7 @@ clientMsfrpc.prototype.rpc = function(cmd){
 
 
 clientMsfrpc.prototype.exec = Promise.method(function(args) {
+
   if(this.persist === true){
     if(this.tokenTimeout != null){
       clearTimeout(this.tokenTimeout)
@@ -81,6 +82,7 @@ clientMsfrpc.prototype.exec = Promise.method(function(args) {
   }
   
   function addToken(token){
+     args = (args instanceof Array) ? args : [args]
      var arr = [];
      arr.push(args.shift());
      arr.push(token);
