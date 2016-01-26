@@ -1,5 +1,5 @@
 # msfrpc-client
-NodeJS client for msfrpcd with es6 promises
+NodeJS client for msfrpcd using bluebird promises
 
 ```
 npm install msfrpc-client-node --save
