@@ -18,13 +18,10 @@ client.exec('core.version')
 )
 .catch(console.log);
 
-client.exec(['module.exploits'])
+client.exec(['module.info', 'exploit', 'netware/smb/lsass_cifs' ])
 .then(
   (res)=>{
-    for(var i=0;i<res.length;i++){
-      console.log(res[i])
-    }
+    console.log(res);
   }
 )
 .catch(console.log);
-
