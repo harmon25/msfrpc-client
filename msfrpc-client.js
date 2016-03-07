@@ -3,7 +3,6 @@ var msgpack = require('msgpack5')(), encode = msgpack.encode , decode = msgpack.
 var Promise = require("bluebird");
 var translateResponse = require('./lib/translate-response')
 
-
 // prototype function
 function clientMsfrpc(options) {
         var options = options || {}
@@ -42,29 +41,29 @@ clientMsfrpc.prototype.login = Promise.method(function(){
 });
 
 clientMsfrpc.prototype.rpc = function(cmd){
-    var data = encode(cmd);
-    var clength = Buffer.byteLength(data.toString('ascii'));
-    var proto = (this.ssl == true) ? 'https://' : 'http://'
+  var data = encode(cmd);
+  var clength = Buffer.byteLength(data.toString('ascii'));
+  var proto = (this.ssl == true) ? 'https://' : 'http://'
 
-    var url = proto + this.host + ":" + this.port + '/api/1.0/'
-    var options = {
-      url:url,
-      headers:{
-        'content-type':'binary/message-pack',
-        'content-length': clength
-      },
-      timeout:5000,
-      encoding:null,
-      strictSSL:false,
-      body:data
-    }
-    //post API Command, decode response, translale buffered strings to utf8 strings
-    function handleErr(err){
-      var err_msg = "Failed to connect to msfrpcd"
-      return Promise.reject(err_msg);
-    }
+  var url = proto + this.host + ":" + this.port + '/api/1.0/'
+  var options = {
+    url:url,
+    headers:{
+      'content-type':'binary/message-pack',
+      'content-length': clength
+    },
+    timeout:5000,
+    encoding:null,
+    strictSSL:false,
+    body:data
+  }
+  //post API Command, decode response, translale buffered strings to utf8 strings
+  function handleErr(err){
+    var err_msg = "Failed to connect to msfrpcd"
+    return Promise.reject(err_msg);
+  }
 
-    return rp.post(options).then(decode,handleErr).then(translateResponse);  
+ return rp.post(options).then(decode,handleErr).then(translateResponse);  
 }
 
 

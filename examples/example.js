@@ -9,19 +9,71 @@ var client = new MsfRpcClient({
                                 persist:false
                               });
 
+
 client.exec('core.version')
 .then(
   (res)=>{
+    console.log(res);
     console.log(`MSF Version : ${res.version} `)
     console.log(`API Verson: ${res.api}`)
   }
 )
 .catch(console.log);
 
-client.exec(['module.info', 'exploit', 'netware/smb/lsass_cifs' ])
+client.exec(['module.exploits'])
 .then(
   (res)=>{
     console.log(res);
   }
 )
 .catch(console.log);
+
+client.exec('session.list')
+.then(
+  (res)=>{
+    console.log(res)
+  }
+)
+.catch(console.log);
+
+client.exec(['db.hosts', {}])
+.then(
+  (res)=>{
+    console.log(res);
+  }
+)
+.catch(console.log);
+
+client.exec(['db.workspaces'])
+.then(
+  (res)=>{
+    console.log(res);
+  }
+)
+.catch(console.log);
+
+client.exec(['db.get_workspace', 'default'])
+.then(
+  (res)=>{
+    console.log(res);
+  }
+)
+.catch(console.log);
+
+client.exec(['job.list'])
+.then(
+  (res)=>{
+    console.log(res);
+  }
+)
+.catch(console.log);
+
+
+client.exec(['module.info', 'exploit', 'unix/misc/xerox_mfp' ])
+.then(
+  (res)=>{
+    console.log(res);
+  }
+)
+.catch(console.log);
+

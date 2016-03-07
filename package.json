@@ -1,6 +1,6 @@
 {
   "name": "msfrpc-client-node",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "NodeJS client for msfrpcd using Bluebird Promises",
   "main": "msfrpc-client.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "security"
   ],
   "dependencies": {
-    "bluebird": "^2.10.2",
-    "msgpack5": "^3.1.0",
-    "request-promise": "^0.4.3"
+    "bluebird": "^3.3.3",
+    "msgpack5": "^3.3.0",
+    "request-promise": "^2.0.1"
   }
 }
